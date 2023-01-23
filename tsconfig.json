@@ -1,0 +1,61 @@
+// 这个文件可以监视所有ts文件的改变，改变了之后他会重新编译
+// tsconfig.json是ts编译器的配置文件，ts编译器可以根据他的信息来对代码进行编译
+{
+  "compilerOptions": {  // 编译器的选项
+    "outDir": "build/dist",  // 用来指定ts文件编译后文件所在的目录
+    "module": "esnext",  // 指定要使用的模块化规范
+    "target": "esnext",
+    "lib": ["esnext", "dom"],  // 用来指定项目中要使用的库
+    "sourceMap": true,
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowJs": true,  // 是否对js文件进行编译，默认是false
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "strict": true,  // 所有严格检查的总开关，使用了true，下面的那些"alwaysStrict""strictNullChecks"等等都开启，推荐true，这样我们的代码才会更加严谨
+    "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.umi/*"]
+    },
+
+    // 扩展：
+    // "target": "ES3"  // 用来指定ts被编译为的ES版本，可以传一个错误的值来编译一下，会报错，叫你传什么参数
+    // "outFile": ""  // 将代码合并为一个文件，设置outFile后，所有的全局作用域中的代码会合并到同一个文件中
+    // "checkJs": true  // 是否检查js代码是否符合语法规范，默认是false
+    // "removeComments": true  // 是否移除注释，默认是false
+    // "noEmit": true  //不生成编译后的文件，使用了true之后就不会生成编译之后的文件，可以用来检查语法
+    // "noEmitOnError": true  // 当有错误时不生成编译后的文件
+    // "alwaysStrict": true  // 用来设置编译后的文件是否使用严格模式，默认false，使用了严格模式之后，就会在生成的js文件第一行有一行"user strict"
+    // "noImplicitAny": true  // 不允许隐式的any类型
+    // "noImplicitThis": false  // 不允许不明确类型的this
+    // "strictNullChecks": true  // 严格的检查空值
+  },
+  "include": [  // 用来指定哪些目录下的ts文件需要被编译
+    "mock/**/*",  // 一个*表示任意文件，两个*表示任意目录
+    "src/**/*",
+    "playwright.config.ts",
+    "tests/**/*",
+    "test/**/*",
+    "__test__/**/*",
+    "typings/**/*",
+    "config/**/*",
+    ".eslintrc.js",
+    ".stylelintrc.js",
+    ".prettierrc.js",
+    "jest.config.js",
+    "mock/*"
+  ],
+  // 不包含，不编译下面的文件目录
+  "exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"],
+
+  // 扩展：
+  // "extends": "./configs/base"  // 表示将xxx.json包含在当前tsconfig.json文件中，就是继承
+  // "file": ["core.ts","sys.ts"]  //指定被编译文件的列表，只有需要编译的文件少时才会用到
+}
